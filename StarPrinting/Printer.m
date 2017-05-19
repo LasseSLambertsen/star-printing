@@ -393,7 +393,7 @@ static char const * const ConnectJobTag = "ConnectJobTag";
         BOOL error = !portConnected || !self.isReadyToPrint;
 
         if (!error) {
-            ISCBBuilder *builder = [StarIoExt createCommandBuilder:StarIoExtEmulationStarGraphic];
+            ISCBBuilder *builder = [StarIoExt createCommandBuilder:StarIoExtEmulationStarLine];
 
             [builder beginDocument];
 
