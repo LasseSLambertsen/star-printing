@@ -398,7 +398,7 @@ static BOOL heartbeatEnabled = YES;
     [self print:printData];
 }
 
-- (void)print:(PrintData *)printData {
+- (void)print:(NSString *)s {
     [self log:@"Queued a print job"];
 
     PrinterJobBlock printJob = ^(BOOL portConnected) {
@@ -406,26 +406,11 @@ static BOOL heartbeatEnabled = YES;
 
         if (!error) {
             ISCBBuilder *builder = [StarIoExt createCommandBuilder:StarIoExtEmulationStarLine];
-
+            [builder appendCodePage:SCBCodePageTypeUTF8];
+            [builder appendInternational:SCBInternationalTypeDenmark2];
+            
             [builder beginDocument];
-
-            if (printData.image != nil) {
-                [builder appendBitmap:printData.image diffusion:NO];
-            } else {
-                NSDictionary *dictionary = printData.dictionary;
-                NSString *filePath = printData.filePath;
-
-                NSData *contents = [[NSFileManager defaultManager] contentsAtPath:filePath];
-                NSMutableString *s = [[NSMutableString alloc] initWithData:contents encoding:NSUTF8StringEncoding];
-
-                [dictionary enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString *value, BOOL *stop) {
-                    [s replaceOccurrencesOfString:key withString:value options:NSCaseInsensitiveSearch range:NSMakeRange(0, [s length])];
-                }];
-
-                PrintParser *parser = [[PrintParser alloc] init];
-                [builder appendData:[parser parse:[s dataUsingEncoding:NSUTF8StringEncoding]]];
-            }
-
+            [builder appendData:[s dataUsingEncoding:NSUTF8StringEncoding]];
             [builder appendCutPaper:SCBCutPaperActionPartialCutWithFeed];
             [builder endDocument];
 
