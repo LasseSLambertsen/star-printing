@@ -9,8 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "Printer.h"
 #import "Printable.h"
-#import "PrintParser.h"
-#import "PrintData.h"
 
 @interface StarPrinting : NSObject
 
