@@ -7,7 +7,6 @@
 
 #import "Printer.h"
 #import "PrintCommands.h"
-#import "PrintParser.h"
 #import <CocoaLumberjack/CocoaLumberjack.h>
 #import <StarIO/Port.h>
 #import <StarIO_Extension/StarIoExt.h>
@@ -382,21 +381,6 @@ static BOOL heartbeatEnabled = YES;
 }
 
 #pragma mark - Printing
-
-- (void)printTest {
-    if (![Printer connectedPrinter]) return;
-
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"test" ofType:@"xml"];
-
-    NSDictionary *dictionary = @{
-                           @"{{printerStatus}}" : [Printer stringForStatus:[Printer connectedPrinter].status],
-                           @"{{printerName}}" : [Printer connectedPrinter].name
-                           };
-
-    PrintData *printData = [[PrintData alloc] initWithDictionary:dictionary atFilePath:filePath];
-
-    [self print:printData];
-}
 
 - (void)print:(NSString *)s {
     [self log:@"Queued a print job"];
