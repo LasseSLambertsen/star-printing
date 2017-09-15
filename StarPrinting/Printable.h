@@ -14,7 +14,7 @@
 
 @required
 
-- (PrintData *)printedFormat;
+- (NSString *)printedFormat;
 
 @end
 
