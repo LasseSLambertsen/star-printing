@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "Printer.h"
-#import "PrintData.h"
 
 @protocol Printable <NSObject>
 
