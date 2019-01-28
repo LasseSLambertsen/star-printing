@@ -391,9 +391,9 @@ static BOOL heartbeatEnabled = YES;
             ISCBBuilder *builder = [StarIoExt createCommandBuilder:StarIoExtEmulationStarLine];
             [builder beginDocument];
 
-            [builder appendCodePage:SCBCodePageTypeUTF8];
+            [builder appendCodePage:SCBCodePageTypeCP999];
             [builder appendInternational:SCBInternationalTypeDenmark];
-            [builder appendData:[s dataUsingEncoding:NSUTF8StringEncoding]];
+            [builder appendData:[s dataUsingEncoding:NSWindowsCP1252StringEncoding]];
             [builder appendCutPaper:SCBCutPaperActionPartialCutWithFeed];
             [builder endDocument];
 
